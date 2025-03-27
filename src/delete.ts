@@ -29,17 +29,28 @@ async function deleteUser(id?: number) {
   }
 }
 
-// DELETE TODO
-async function deleteTodo(id?: number) {
-  if (!id) {
-    id = parseInt(prompt('Enter the todo id : ')!)
+// DELETE TODO(s)
+async function deleteTodo(id?: number, todoId?: number) {
+  try {
+    if (!id) {
+      id = parseInt(prompt('Enter the user id : ')!)
+    }
+    if (!todoId) {
+      todoId = parseInt(prompt('Enter the todo id : ')!)
+    }
+    const todo = await client.todo.delete({
+      where: {
+        userId: id,
+        id: todoId,
+      },
+      select: {
+        title: true,
+      },
+    })
+    console.log(`Deleted todo ${todo.title} successfully\n`)
+  } catch (error) {
+    console.log(error)
   }
-  const todo = await client.todo.delete({
-    where: {
-      id: id,
-    },
-  })
-  console.log(`Deleted todo ${todo.title} successfully\n`)
 }
 
 export { deleteTodo, deleteUser }

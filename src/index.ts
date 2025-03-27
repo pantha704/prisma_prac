@@ -7,9 +7,9 @@ import { updateUser, updateTodo } from './update'
 const prompt = promptSync()
 let exit = false
 async function main() {
-  console.log('Hello! \n Welcome to your Todo App\nPlease choose an option : ')
+  console.log('Hello!\nWelcome to your Todo App\nPlease choose an option : ')
   const option = prompt(
-    '1. Create John Doe\n2. Create a user\n3. Create a todo\n4. Get a user\n5. Get todos\n6. Update a user\n7. Update a todo\n8. Delete a user\n9. Delete a todo\nType "exit" to quit\n'
+    '1. Create John Doe\n2. Create a user\n3. Create a todo\n4. Get a user\n5. Get todo(s)\n6. Update a user\n7. Update a todo\n8. Delete a user\n9. Delete todo(s)\nType "exit" to quit\n'
   )
   switch (option) {
     case '1':
@@ -49,6 +49,10 @@ async function main() {
   }
 }
 
-while (!exit) {
-  main()
+async function run() {
+  while (!exit) {
+    await main()
+  }
 }
+
+run()

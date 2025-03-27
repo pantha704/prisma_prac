@@ -21,8 +21,8 @@ const prompt = (0, prompt_sync_1.default)();
 let exit = false;
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log('Hello! \n Welcome to your Todo App\nPlease choose an option : ');
-        const option = prompt('1. Create John Doe\n2. Create a user\n3. Create a todo\n4. Get a user\n5. Get todos\n6. Update a user\n7. Update a todo\n8. Delete a user\n9. Delete a todo\n10. Exit\n');
+        console.log('Hello!\nWelcome to your Todo App\nPlease choose an option : ');
+        const option = prompt('1. Create John Doe\n2. Create a user\n3. Create a todo\n4. Get a user\n5. Get todo(s)\n6. Update a user\n7. Update a todo\n8. Delete a user\n9. Delete todo(s)\nType "exit" to quit\n');
         switch (option) {
             case '1':
                 yield (0, create_1.createJohnDoe)();
@@ -61,6 +61,11 @@ function main() {
         }
     });
 }
-while (!exit) {
-    main();
+function run() {
+    return __awaiter(this, void 0, void 0, function* () {
+        while (!exit) {
+            yield main();
+        }
+    });
 }
+run();

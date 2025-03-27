@@ -45,17 +45,29 @@ function deleteUser(id) {
         }
     });
 }
-// DELETE TODO
-function deleteTodo(id) {
+// DELETE TODO(s)
+function deleteTodo(id, todoId) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (!id) {
-            id = parseInt(prompt('Enter the todo id : '));
+        try {
+            if (!id) {
+                id = parseInt(prompt('Enter the user id : '));
+            }
+            if (!todoId) {
+                todoId = parseInt(prompt('Enter the todo id : '));
+            }
+            const todo = yield client.todo.delete({
+                where: {
+                    userId: id,
+                    id: todoId,
+                },
+                select: {
+                    title: true,
+                },
+            });
+            console.log(`Deleted todo ${todo.title} successfully\n`);
         }
-        const todo = yield client.todo.delete({
-            where: {
-                id: id,
-            },
-        });
-        console.log(`Deleted todo ${todo.title} successfully\n`);
+        catch (error) {
+            console.log(error);
+        }
     });
 }
